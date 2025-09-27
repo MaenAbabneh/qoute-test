@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { PORT } from "./config/env.js";
 import connectDB from "./config/mongoose.js";
 import quoteRouter from "./routes/qoute.js";
@@ -6,6 +7,12 @@ import quoteRouter from "./routes/qoute.js";
 const app = express();
 
 connectDB();
+
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 app.use(express.json());
 
